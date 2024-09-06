@@ -1,0 +1,23 @@
+from pyjop import *
+SimEnv.connect()
+
+
+env = SimEnvManager.first()
+env.reset()
+scan = RangeFinder.first()
+mov = MovablePlatform.first()
+maxval = scan.get_size().z
+textbox = InputBox.first()
+
+
+for i in range(1,10):
+    mov.set_target_location(i,0,0)
+    sleep(2)
+    val = scan.get_size().z
+    if val > maxval:
+        maxval = val
+        textbox.set_text(f"{maxval}")
+       
+
+#cleanup close code
+SimEnv.disconnect()
